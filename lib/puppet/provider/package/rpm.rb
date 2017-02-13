@@ -388,7 +388,7 @@ Puppet::Type.type(:package).provide :rpm, :source => :rpm, :parent => Puppet::Pr
     line.strip!
     hash = {}
 
-    if match = self::NEVRA_REGEX.match(line)
+    if match = self::NEVRA_REGEX.match(line.gsub("'",""))
       self::NEVRA_FIELDS.zip(match.captures) { |f, v| hash[f] = v }
       hash[:provider] = self.name
       hash[:ensure] = "#{hash[:version]}-#{hash[:release]}"
