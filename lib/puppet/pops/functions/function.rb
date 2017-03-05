@@ -79,6 +79,11 @@ class Puppet::Pops::Functions::Function
     @closure_scope || Puppet.lookup(:global_scope) { {} }
   end
 
+  def closure_scope=(value)
+    # If closure scope is explicitly set to not nil, if there is a global scope, otherwise an empty hash
+    @closure_scope=(value)
+  end
+
   # The dispatcher for the function
   #
   # @api private
