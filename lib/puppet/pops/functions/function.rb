@@ -117,6 +117,9 @@ class Puppet::Pops::Functions::Function
 
     func = the_loader.load(:function, function_name)
     if func
+	   if (func.closure_scope == {})
+		   func.closure_scope = scope
+	   end
       Puppet::Util::Profiler.profile(function_name, [:functions, function_name]) do
         return func.call(scope, *args, &block)
       end
