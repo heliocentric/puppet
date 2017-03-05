@@ -53,9 +53,9 @@ class Dispatch < Evaluator::CallableSignature
   # @api private
   def weave(scope, args)
     # no need to weave if there are no injections
-    if @injections.empty?
-      args
-    else
+    # if @injections.empty?
+    #   args
+    # else
       injector = nil # lazy lookup of injector Puppet.lookup(:injector)
       new_args = []
       @weaving.each do |knit|
@@ -85,7 +85,7 @@ class Dispatch < Evaluator::CallableSignature
         end
       end
       new_args
-    end
+    # end
   end
 end
 end
