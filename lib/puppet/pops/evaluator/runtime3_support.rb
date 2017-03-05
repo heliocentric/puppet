@@ -254,6 +254,9 @@ module Runtime3Support
     loader = loaders.private_environment_loader
     if loader && func = loader.load(:function, name)
       Puppet::Util::Profiler.profile(name, [:functions, name]) do
+	if (func.closure_scope == {})
+		func.closure_scope = scope
+	end
         return func.call(scope, *args, &block)
       end
     end
